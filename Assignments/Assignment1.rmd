@@ -1,0 +1,276 @@
+---
+title: "COMP2501 Assignment 1"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Requirements
+
+**Submission deadline: October 8th, 2026 at 23:59 (HKT).**
+
+**Full mark of assignment 1: 50.**
+
+For the following questions, please:
+
+1. Replace all [Input here] places with your information or your answer (for multiple choice).
+2. Complete the code block by adding your own code to fulfill the requirements in each question. Please use the existing code block and do not add your own code block.
+
+Please make sure your Rmd file is a valid Markdown document and can be successfully knitted.
+
+For assignment submission, please knit your final Rmd file into an html file, and submit both your **Rmd** file and the knitted **html** file to Moodle. You get 0 score if 1) the Rmd file you submitted cannot be knitted, and 2) you have not submitted an html file. For each visualization question, please make sure that the generated plot is shown in-place with the question and after the code block. 
+
+---
+
+## Name and UID
+
+Name: [Input here]
+
+UID: [Input here]
+
+---
+
+### Environmental setup 
+You need to have the `dslabs`, `dplyr`, `ggplot2`, and `lubridate` packages installed. If not yet, please run `install.packages(c("dslabs", "dplyr", "ggplot2", "lubridate"))` in your R environment. If you have installed the `tidyverse` package, `dplyr` is installed by default.
+
+```{r, warning=FALSE}
+# Load the required packages
+# install.packages(c("dslabs", "dplyr", "ggplot2", "lubridate"))
+library(dslabs)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+```
+
+### Example question. Print the first 2 records of the murders dataset.
+
+```{r}
+data("murders")
+head(murders, 2)
+```
+
+---
+
+### 1. (1 points) Define a matrix `mat` with 8 rows and 7 columns, print the entries of rows 1-3 and columns 2 & 7 simultaneously.
+
+```{r}
+
+```
+
+---
+
+### 2. (1 points) Write a function `compute_s_k`  that for any given k, computes the $S_k = \frac{e^{-m} m^k}{k!}$. Print $S_k$ for $k$ from 0 to 6 for $m=2$. (Hint: use `sapply`)
+
+```{r}
+compute_s_k <- function(k, m) {
+  
+}
+
+```
+
+---
+
+### 3. (2 points)  Examine the built-in datasets `mtcars` and `VADeaths`. Which of the following is true?
+- a.	tidy data: all small datasets are tidy by definition.
+- b.	tidy data: it has one observation for each row.
+- c.	not tidy: there are multiple rows corresponding to the same observation.
+- d.	not tidy: it is a matrix instead of a data frame.
+
+`mtcars` is **?**
+
+`VADeaths` is **?**
+
+---
+
+### 4. (12 points) Utilize the murders dataset and execute the following tasks.
+
+```{r, warning=FALSE}
+library(dslabs)
+library(dplyr)
+library(ggplot2)
+data("murders")
+```
+
+#### a. (2 points) Compute the murder rate per 100,000 people for each state and store it in a column called "rate". Then use logical operators to find which state has a murder rate per 100,000 people higher than 3. How many states are there? Find these states, sort by their murder rate, and print the top 5 states' state names, abbreviations, murder cases, total populations, and murder rates.
+
+```{r}
+
+```
+
+#### b. (2 points) For all states having a murder rate per 100,000 people higher than 3, use the barplot function to create a barplot with the x-axis being the state abbreviation, and the y-axis being the murder rate per 100,000 people of each state. Order them by their murder rates. (Hints: check some barplot examples at https://r-graph-gallery.com/210-custom-barplot-layout.html)
+
+```{r}
+
+```
+
+#### c. (3 points) Create a table called `my_states` that contains rows for states satisfying two conditions: 1) population is lower than 3 million, and 2) the murder rate per 100,000 people is less than 1.0. Use `select` to show only their state abbreviations, populations, and murder rates. Then use `top_n` function to find the 5 most populated states among them.
+
+```{r}
+
+```
+
+#### d. (2 points) Categorize all states into two groups based on their population: Above median population – states with a population greater than the median. Below median population – states with a population less than or equal to the median. For each group, calculate the average murder rate per 100,000 people and display the results.
+
+```{r}
+
+```
+
+#### e. (3 points) Use the ggplot2 package to create a scatterplot from the murders dataset, where the x-axis is the logarithm of population size, the y-axis is the murder rate per 100,000 people, and each point in the scatterplot is labeled with the state abbreviation. Please add an appropriate title, and axis labels to the plot. Select a theme that you prefer. Briefly describe your finding.
+
+```{r}
+
+```
+
+---
+
+### 5. (4 points) Exploring infant mortality and fertility trends with `gapminder`
+
+```{r, warning=FALSE}
+library(dslabs)
+library(dplyr)
+library(ggplot2)
+data("gapminder")
+```
+
+#### a. (2 points) Calculate the total population-weighted infant mortality rate and average fertility rate for each continent in the year 2010. (Hint: Filter for year == 2010, drop rows with missing values in infant_mortality or fertility, group by continent, compute the weighted average infant_mortality weighted by population, and compute the weighted average fertility.) Sort the resulting table by infant mortality in descending order.
+
+```{r}
+
+```
+
+#### b. (2 points) Create a scatter plot showing the relationship between fertility (x-axis) and life_expectancy (y-axis) across all countries in the year 2010. Map point color to continent. Include appropriate axis labels, a title, and a clean theme.
+
+```{r}
+
+```
+
+---
+
+### 6. (7 points) Tropical cyclones with `storms` (from **dplyr**)
+
+```{r, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(lubridate)  # for timestamps
+data("storms")
+```
+
+#### a. (1 point) List the observation with the **largest wind** speed.
+
+```{r}
+
+```
+
+#### b. (2 points) For (1) the whole dataset, (2) by **year**, compute both: (i) the **maximum wind** and (ii) the **minimum pressure** observed. For the per-year stats, sort the results by maximum wind (descending) and show the top 10 rows.
+
+```{r}
+# (1) Whole dataset
+
+```
+
+```{r}
+# (2) By year
+
+```
+
+#### c. (2 points) Create a **scatter plot** of **wind** vs **pressure**. Note that the wind speeds are recorded in knots and pressures are recorded in millibars. Add a title and axis labels.
+
+```{r}
+
+```
+
+#### d. (2 points) In 2026, Cyclone Dolphin reached a record minimum central barometric pressure of 905 mbar. From the historical data, find storms with a similar central barometric pressure (plus/minus 10 mbar) and calculate the mean and standard deviation of their wind speed. Use these data to estimate Cyclone Dolphin's peak sustained wind speed, how accurate is your estimate?
+
+```{r}
+
+```
+
+---
+
+### 7. (23 points)  Explore the tidyverse with the COVID-19 dataset (http://www.bio8.cs.hku.hk/comp2501/covid.csv), and answer the following questions.
+
+```{r, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+```
+
+#### a. (2 points) Read the CSV formatted dataset. Find out how many observations (rows) and variables (columns) are in the dataset. Print the names of all variables.
+
+```{r}
+covid_data <- read.csv("http://www.bio8.cs.hku.hk/comp2501/covid.csv")
+
+```
+
+#### b. (1 points) List 10 observations that have the most amounts of `deaths` per day.
+
+```{r}
+
+```
+
+#### c. (2 points) How many unique `countriesAndTerritories` with more than 200 observations are in the dataset?
+
+```{r}
+
+```
+
+#### d. (3 points) For 1) the whole dataset, 2) different `countriesAndTerritories`, and 3) different `continentExp`, compute the overall death rate (total deaths divided by total cases), select only entries with more than 100,000 recorded cases, sort the results and show the entries with the highest overall death rates. Use `head` to show the first 5 rows if there are more than 5 rows.
+
+```{r}
+# Whole dataset
+
+```
+
+```{r}
+# By countriesAndTerritories
+
+```
+
+```{r}
+# By continentExp
+
+```
+
+#### e. (1 points) Add a new column `date` with the standard date format "YYYY-MM-DD" to the data table according to the `dateRep` column. Be reminded the format of `dateRep` is "DD/MM/YYYY". Please use head() to show the result. (Hint: use functions from the `lubridate` package to read and write timestamps)
+
+```{r}
+
+```
+
+#### f. (2 points) Create a scatterplot showing `cases` vs. `deaths`. Set an appropriate plot title and axis titles. Are there any dots that seem abnormal? Plot again using log scale for both axes to better display the distribution. How to deal with the warnings?
+
+```{r}
+
+```
+
+#### g. (2 points) Create a line plot showing cases and deaths per day versus date for Germany. You may use lines of different colors or styles. Set an appropriate plot title and axis titles. Remember to include a description for the two lines.
+
+```{r}
+
+```
+
+#### h. (2 points) Similar to above, create a line plot of deaths per day versus date for the five countries with the highest overall death rate (derived in part d). Use different line colors for each country. Set an appropriate plot title and axis titles.
+
+```{r}
+
+```
+
+#### i. (4 points) Filter out the data in Germany. Assume the Germany government determined an epidemic situation of national significance on 2020-06-10. A lot of restrictive measurements such as social distancing were implemented to prevent the spread of COVID-19. Find out the 1) average number of cases before the determination, 2) average number of cases after the determination, 3) average number of deaths before the determination, and 4) average number of deaths after the determination. Remove missing values from data if they are coded as NA, if there is any.
+
+```{r}
+
+```
+
+#### j. (4 points) Investigate day-of-the-week patterns in reported COVID-19 deaths. Extract the weekday from the `date` variable using `lubridate::wday()`. Compute the average daily deaths for each day of the week (Monday through Sunday) for data from `United_States_of_America`. Create a bar plot displaying the reporting trend across weekdays. Set an appropriate plot title and axis titles. Briefly discuss your findings.
+
+```{r}
+
+```
+
