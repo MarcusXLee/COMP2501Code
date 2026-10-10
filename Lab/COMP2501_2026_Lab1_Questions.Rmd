@@ -1,0 +1,202 @@
+---
+title: "COMP2501 Lab Sheet 1"
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error = FALSE)
+```
+
+## Instructions
+
+* You are expected to answer the questions in the sheet in class.
+* You are encouraged to try different code or arguments.
+* You can discuss with other students for ideas but do not copy from others.
+* If you have any questions, ask Google, the TAs or lecturer.
+* Sample answers will be given after the class on Moodle.
+* Keep the original `airquality` dataset unchanged. Store complete results in the specified objects, and use `head()` only when displaying results.
+* Keep calculated values at their full precision. The number of decimal places displayed is not assessed.
+
+------------------------------------------------------------------------
+
+### Environmental setup
+
+Use R 4.1 or later. You need the `dplyr` and `ggplot2` packages installed. If they are not installed, run `install.packages(c("dplyr", "ggplot2"))` once. The `datasets` package is included with R.
+
+All datasets used in this sheet are included with R. No external data file is required. Use **Knit** to run and render the document. Run the help commands in Question 2(a) interactively in RStudio; when knitting, these commands are displayed without opening a help page.
+
+```{r packages}
+# Load the packages.
+library(dplyr)
+library(ggplot2)
+library(datasets)
+```
+
+### 1. Write a function `compute_s_n` that, for a given `n`, computes the sum $S_n = \sum_{i=1}^{n} i(i+1)$.
+
+Assume that `n` is a single positive integer satisfying `1 <= n <= 1000`. Input validation is not required. The function should return the sum as a single numeric value.
+
+First implement `compute_s_n` using a `for` loop. Then write a second function named `compute_s_n_vectorized` that performs the same calculation using vector operations and `sum()`, without a loop.
+
+Evaluate both functions at `n = 3`, for which `S_3 = 1 * 2 + 2 * 3 + 3 * 4 = 20`, and at `n = 100`. Report the results and check that the two implementations agree for each input.
+
+```{r q1}
+
+```
+
+```{r q1_vectorized}
+
+```
+
+### 2. Explore a built-in R dataset using basic R commands
+
+In this question, you will use the built-in dataset `airquality` to practise basic commands for exploring a dataset before performing more detailed data analysis.
+
+The `airquality` dataset contains daily air quality measurements in New York.
+
+#### a. Getting help
+
+Use the R help system to open the documentation for the `airquality` dataset.
+
+```{r q2a, eval=interactive()}
+
+```
+
+#### b. Loading and examining the dataset
+
+Load the `airquality` dataset and use `str()` to examine its structure.
+
+```{r q2b}
+
+```
+
+#### c. Summarizing the dataset
+
+Use a single R command to display a statistical summary of all variables in `airquality`.
+
+```{r q2c}
+
+```
+
+#### d. Accessing a variable
+
+Use the `$` operator to access the variable `Ozone`.
+
+Then determine the class of this variable.
+
+Store the result as:
+
+```r
+ozone_class
+```
+
+```{r q2d}
+
+```
+
+#### e. Checking for missing values
+
+Check whether the entire `airquality` dataset contains any missing values.
+
+Store the result as:
+
+```r
+has_missing
+```
+
+```{r q2e}
+
+```
+
+#### f. Counting missing values
+
+Calculate the number of missing values in the `Ozone` variable.
+
+Store the result as:
+
+```r
+missing_ozone
+```
+
+```{r q2f}
+
+```
+
+#### g. Calculating a summary value with missing observations
+
+Calculate the mean value of `Ozone`, ignoring missing observations.
+
+Store the result as:
+
+```r
+mean_ozone
+```
+
+```{r q2g}
+
+```
+
+#### h. Creating a frequency table
+
+Use `table()` to count the number of observations for each value of `Month`.
+
+Store the result as:
+
+```r
+month_counts
+```
+
+and print it.
+
+```{r q2h}
+
+```
+
+### 3. Play with the built-in dataset `airquality` to practise data manipulation with `dplyr` and visualization with `ggplot2`. Please use `head()` to show the results if there are too many rows in them.
+
+The dataset contains daily measurements in New York from May to September 1973. `Temp` is the daily maximum temperature in degrees Fahrenheit, `Wind` is the average wind speed in miles per hour, and `Month` and `Day` identify the observation date. You can use `?airquality` to read the dataset documentation.
+
+#### a. Load the original dataset `airquality`. Print 1) the first 6 rows, 2) the numbers of rows and columns, and 3) the names of all variables.
+
+```{r q3a}
+
+```
+
+#### b. Create a new variable `Temp_C` by converting `Temp` from Fahrenheit to Celsius using `Temp_C = (Temp - 32) * 5 / 9`. Retain all original rows and columns, and save the result as `airquality_modified`. Display its first 6 rows.
+
+```{r q3b}
+
+```
+
+#### c. 1) Use `top_n()` with `n = 1` and `Temp_C` as the ranking variable to find all rows with the highest `Temp_C` in `airquality_modified`. Include all tied rows, if any, and save the result as `airquality_top`. 2) Sort all rows of `airquality_modified` by `Temp_C` in descending order and save the complete result as `airquality_sorted`. No particular order is required among rows with equal temperatures. Print `airquality_top`, display the first 6 rows of `airquality_sorted`, and check whether the selected maximum equals the `Temp_C` value in the first sorted row.
+
+```{r q3c}
+
+```
+
+#### d. Filter `airquality_modified` to retain only rows where both `Temp > 80` and `Wind < 10`. These thresholds refer to the original units of degrees Fahrenheit and miles per hour. Save the complete result as `airquality_filtered` and display its first 6 rows.
+
+```{r q3d}
+
+```
+
+#### e. Select only the `Month` and `Temp_C` columns, in that order, from `airquality_filtered`. Save the result as `airquality_selected` and display its first 6 rows.
+
+```{r q3e}
+
+```
+
+#### f. Group `airquality_selected` by `Month` and calculate the mean `Temp_C` for each month represented in this selected dataset. Save the summary as `airquality_grouped`, with columns `Month` and `mean_temp_c` in that order. Sort the summary by `Month` in ascending order and print the entire result. Use only the rows in `airquality_selected` when calculating these means.
+
+```{r q3f}
+
+```
+
+#### g. Using only `airquality_grouped` from part f, create a bar chart with `ggplot2` showing the mean daily maximum temperature in degrees Celsius for each month. Put month on the x-axis as a category and `mean_temp_c` on the y-axis. Include only the months present in the summary, in ascending order. The bar heights must be the calculated means, not counts of rows. Add axis labels with the temperature unit and a title or subtitle making clear that the means are for the days selected in part d.
+
+```{r q3g}
+
+```
