@@ -1,0 +1,180 @@
+---
+title: "COMP2501 Assignment 2"
+output:
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Requirements
+
+**Submission deadline: Nov 2nd, 2026 at 23:59 (HKT).**
+
+**Full mark of assignment 2: 50.**
+
+For the following questions, please:
+
+1. Replace all [Input here] places with your information or your answer.
+2. Complete the code block by adding your own code to fulfill the requirements in each question. Please use the existing code block and do not add your own code block. Noting that please use `head()` to show the corresponding results if there are too many rows in them.
+
+Please make sure your Rmd file is a valid Markdown document and can be successfully knitted.
+
+For assignment submission, please knit your final Rmd file into an html file, and submit both your **Rmd** file and the knitted **html** file to Moodle. You get 0 score if 1) the Rmd file you submitted cannot be knitted, and 2) you have not submitted an html file. For each visualization question, please make sure that the generated plot is shown in-place with the question and after the code block. 
+
+---
+
+
+## Name and UID
+
+Name: [Input here]
+
+UID: [Input here]
+
+---
+
+
+### Environmental setup 
+You need to have the `datasets`, `tidyr`, `dplyr`, `rvest`, `stringr`, `lubridate`, `tidytext`, `textdata`, `readr`, `janeaustenr`, and `ggplot2` packages installed. If not yet, please run `install.packages(c("datasets", "tidyr", "dplyr", "rvest", "stringr", "lubridate", "tidytext", "textdata", "readr", "janeaustenr", "ggplot2"))` in your R environment.
+
+```{r, warning=FALSE}
+# Load the package.
+library(datasets)
+library(tidyr)
+library(readr)
+library(dplyr)
+library(rvest)
+library(stringr)
+library(lubridate)
+library(janeaustenr)
+library(tidytext)
+library(textdata)
+library(ggplot2)
+```
+
+
+### 1. (6 points) Load the built-in `AirPassengers` dataset.
+```{r}
+data("AirPassengers")
+head(AirPassengers, 24)
+```
+
+#### a. (2 points) Transform it into a long data frame. Note that AirPassengers is a time series, you can use `time` and `cycle` to extract year and month. The resulting data frame should contain three columns: "Year", "Month", and "Passengers". Show the first 5 rows.
+```{r}
+
+```
+
+#### b. (1 point) Reshape the output from part a. into a wide data frame using pivot functions, with one year as a row, and each month as a column, entries representing passenger counts. Show the passenger values of summer months (June, July, August) from 1950 to 1955.
+```{r}
+
+```
+
+#### c. (3 points) Use an appropriate graph to plot the total passenger counts of summer months (June, July, August) and winter months (December, January, February) across years. Which season has more passengers?
+```{r}
+
+```
+
+### 2. (2 points) Perform different types of joins between the following `employees` and `payroll` data frames using the `"emp_id"` column. Use `left_join`, `right_join`, `inner_join`, and `full_join` to create four resulting data frames, name them appropriately. Display the data frame that contains the most rows.
+```{r}
+employees <- data.frame(
+  emp_id = c(101,102,103,104,105),
+  name   = c("Ana","Ben","Chen","Divya","Evan"),
+  dept   = c("Data","Data","HR","Finance","Ops")
+)
+payroll <- data.frame(
+  emp_id = c(101,101,102,103,103,103,106),
+  month = c(1,2,1,1,2,3,1),
+  salary = c(95,100,88,76,80,82,70)
+)
+
+```
+
+### 3. (6 points) Use the `rvest` package to scrape the titles, ratings, and prices of books from https://books.toscrape.com/ (the 20 entries on the first page). Store the scraped data in a data frame named `books` and display the top 5 entries ranked by price (highest to lowest). Refer to this tutorial to learn more about HTML scraping: https://r4ds.hadley.nz/webscraping.html.
+```{r}
+url <- "https://books.toscrape.com/"
+
+```
+
+### 4. (6 points) Extract entries from the following texts using regular expression:
+
+#### a. (2 points) Extract all dates formatted as YYYY-MM-DD or DD/MM/YYYY from the following text: "The event starts on 2026-05-12 and ends on 15/05/2026, with early registration opening on 2026-04-01."
+```{r}
+text <- "The event starts on 2026-05-12 and ends on 15/05/2026, with early registration opening on 2026-04-01."
+
+```
+
+#### b. (2 points) Extract all full website URLs starting with http:// or https:// from the following text: "Visit our portal at https://www.example.com/home or read docs at http://api.test.org/v2". We assume here that URLs only contain alphabetic and numerical characterers, dots, and slash symbols.
+```{r}
+text <- "Visit our portal at https://www.example.com/home or read docs at http://api.test.org/v2"
+
+```
+
+#### c. (2 points) Extract all valid 6-character hex color codes (including the leading # symbol) from the following text: "Use #FFFFFF for white background, #333 as shorthand, #00FF00 for success status, and #a1b2c3 for borders." Note that here "#333" should not be matched, only 6-character color codes should be retrieved.
+```{r}
+text <- "Use #FFFFFF for white background, #333 as shorthand, #00FF00 for success status, and #a1b2c3 for borders."
+
+```
+
+### 5. (10 points) Scrape data from Wikipedia with the `rvest` package, and answer the following questions.
+
+#### a. (2 points) Choose a Wikipedia page of your interest (or just use today's featured article). Scrape the first paragraph from the Introduction section of that page. Store the scraped text in a variable and print it.
+
+```{r}
+
+```
+
+#### b. (3 points) If there is an image in the page you picked, try to get the image URL of the first image. Please output the full image URL, prepend "https:" if necessary. Download the image and display it using `knitr::include_graphics`.
+
+```{r}
+
+```
+
+#### c. (5 points) Visit the Wikipedia page of "University of Hong Kong" (https://en.wikipedia.org/wiki/University_of_Hong_Kong). Identify the image URL for HKU's coat of arms, download it and display it in-line. In addition, identify a table that lists the QS subject rankings of HKU, transform it into a R data frame and display it.
+```{r}
+url <- "https://en.wikipedia.org/wiki/University_of_Hong_Kong"
+
+```
+
+### 6. (20 points) Explore text mining and sentiment analysis across Jane Austen's works, and answer the following questions.
+
+#### a. (2 points) Load the `austen_books()` dataset from the `janeaustenr` package as `books`. Print the dimensions (rows and columns) of `books`, the unique book titles contained in the dataset, and display the first 5 rows.
+
+```{r}
+
+```
+
+#### b. (2 points) Identify the total line count for each book in `books`. Sort the books in descending order by line count, and show the five longest books. Store them in a separate data frame named `long_books`
+```{r}
+
+```
+
+#### c. (2 points) For each book in `long_books`, find the line that contains the maximum number of characters. If there are ties, keep the line that appears earliest in the text. Display these resulting lines in a new data frame. (Hint: use `row_number` for numbering lines, use `slice`, `slice_min`, or `slice_max` to select rows.)
+
+```{r}
+
+```
+
+#### d. (2 points) Look at the novel Pride & Prejudice. Extract its content, remove all blank lines containing only whitespace or no characters, and add a sequential line number column "line_id", and print lines 100 to 120 of texts.
+
+```{r}
+
+```
+
+#### e. (3 points) Perform sentiment analysis on the novel Pride & Prejudice. Use the sentiment lexicon `afinn` through `get_sentiments()` using the `textdata` package, save it as a data frame named `word_sentiments`. Tokenize `texts` of your book of interest into words, remove stop words and numbers, and then map the words to `word_sentiments` using an appropriate join function. You only need to keep words that have corresponding sentiments in `afinn`. Count the occurrences of `word` and their corresponding sentiment `value`, sort the results in a descending order according to the occurrence count (`n`) column. What are the ten most frequent words and what are their sentiment values? 
+```{r}
+
+```
+
+#### f. (4 points) Analyze the sentiment progression throughout the novel. Calculate the average sentiment score for each line using `word_sentiments`. In this case, do not discard words that have no corresponding sentiment, assign a neutral score of 0. Plot the progression of sentiment versus line number across the novel using an appropriate graph.
+```{r}
+
+```
+
+#### g. (5 points) A single line of text can yield a very noisy sentiment signal. Group lines in the novel into segments of `k` lines each, calculate the average sentiment score and plot it in the same type of graph. Be careful that the scale of the axis representing line number shouldn't be changed. Try alter `k` (from 10 to 1000) to generate multiple plots, discuss your findings.
+
+```{r}
+
+```
