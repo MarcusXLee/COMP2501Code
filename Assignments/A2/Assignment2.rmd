@@ -30,9 +30,9 @@ For assignment submission, please knit your final Rmd file into an html file, an
 
 ## Name and UID
 
-Name: [Input here]
+Name: [LI Xinye]
 
-UID: [Input here]
+UID: [3036483832]
 
 ---
 
